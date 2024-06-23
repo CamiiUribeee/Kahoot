@@ -1,0 +1,25 @@
+[
+    {
+      "questions": [
+        {
+          "question": "¿Cuál es el color del cielo?",
+          "answers": [
+            { "name": "Azul", "correct": true },
+            { "name": "Rojo", "correct": false },
+            { "name": "Verde", "correct": false },
+            { "name": "Amarillo", "correct": false }
+          ]
+        },
+        {
+          "question": "¿Cuál es el color de la hierba?",
+          "answers": [
+            { "name": "Azul", "correct": false },
+            { "name": "Rojo", "correct": false },
+            { "name": "Verde", "correct": true },
+            { "name": "Amarillo", "correct": false }
+          ]
+        }
+      ]
+    }
+  ]
+  
