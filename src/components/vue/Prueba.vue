@@ -23,39 +23,39 @@
     }
     ]);
 
-    const boxState = ref(false);
-    const currentQuestionIndex = ref(0);
-    const selectedAnswerIndex = ref(null);
+    const boxState = ref(false); //false o null para primero rastrear la respuesta seleccionada
+    const currentQuestionIndex = ref(0); //numero de preguntas actual
+    const selectedAnswerIndex = ref(null); //la respuesta seleccionada 
 
 
-    const verifyAnswer = (correct) => {
-      boxState.value = correct;
-    };
+    function verifyAnswer(correct) {  //envio el parametro de mi json y se lo asigno a mi caja (al estado de mi caja) 
+      boxState.value = correct;       //sea que la respuesta esté correcta o no
+    }
 
-    const selectAnswer = (index, correct) => {
+    function selectAnswer(index, correct) {
       selectedAnswerIndex.value = index;
       verifyAnswer(correct);
-    };
+    }
 
-    const handleNextQuestion = () => {
-      if (currentQuestionIndex.value < questions.value.length - 1) {
+    function handleNextQuestion() {  //FUNCION PARA PASAR LA PREGUNTA
+      if (currentQuestionIndex.value < questions.value.length - 1) {  //si el numero de preguntas es menor a las preguntas...
         currentQuestionIndex.value++;
         boxState.value = null;
         selectedAnswerIndex.value = null;
       } else {
-        // Logic to handle end of questions can be added here if needed
+        // por si quiero agregar más 
       }
-    };
+    }
 
 
 </script>
 
 <template>
-    <div class="max-w-6xl w-full mx-auto flex flex-col justify-center items-center">
+    <div class="max-w-6xl w-full mx-auto flex flex-col justify-center items-center">                                 <!--CSS de la caja mayor  -->
     <div :class="boxState === true ? 'bg-green-500' : boxState === false ? 'bg-red-500' : 'bg-gray-500'" class="rounded-md px-7 py-14 w-2/5 text-center mt-10">
       <h1>UFPSO</h1>
     </div>
-
+                                <!-- Este questions es el array de preguntas definido arriba-->
     <div v-if="currentQuestionIndex < questions.length" class="p-3 flex flex-col justify-center items-center">
       <h1 class="text-xl font-bold mb-4">{{ questions[currentQuestionIndex].question }}</h1>
       <div class="grid grid-cols-2 gap-4 w-full">
@@ -64,14 +64,12 @@
           :key="index"
           class="p-4 border cursor-pointer text-center w-full h-24"
           :class="{
-            'bg-red-400': selectedAnswerIndex === index && !answer.correct,
-            'bg-green-400': selectedAnswerIndex === index && answer.correct,
             'bg-red-600 hover:bg-red-900': index === 0,
             'bg-blue-600 hover:bg-blue-950': index === 1,
             'bg-yellow-400 hover:bg-yellow-700': index === 2,
             'bg-green-600 hover:bg-green-800': index === 3,
           }"
-          @click="selectAnswer(index, answer.correct)"
+          @click="selectAnswer(index, answer.correct)"   
         >
           {{ answer.name }}
         </div>
